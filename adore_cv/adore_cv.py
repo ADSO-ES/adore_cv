@@ -33,6 +33,20 @@ class YoloCnnDetector(Node):
 
         self.input_size = input_size
 
+        self.yolo_pred_class = [
+            "0: Speed limit 30 round",
+            "1: Speed limit 60 round",
+            "2: Speed limit 90 round",
+            "3: Speed limit 40 square",
+            "4: Speed limit 60 square",
+            "5: Speed limit 90 square",
+            "6: Speed limit 30 square",
+            "7: Polygone Stop",
+            "8: Cone",
+            "9: Barrier",
+            "10: Beacone"
+        ]
+
         # Create timer to run detection at ~10Hz
         #self.timer = self.create_timer(0.1, self.detect_callback)
 
@@ -77,7 +91,9 @@ class YoloCnnDetector(Node):
             detection.header = detection_array.header
             
             yolo_hyp = ObjectHypothesisWithPose()
-            yolo_hyp.hypothesis.class_id = str(class_id)
+            yolo_hyp.hypothesis.class_id = self.yolo_pred_class[class_id]
+            #yolo_hyp.hypothesis.class_id = str(class_id)
+
             print(f"class id:{conf}")
             yolo_hyp.hypothesis.score = conf
             detection.results.append(yolo_hyp)
