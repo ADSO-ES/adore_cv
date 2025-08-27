@@ -134,7 +134,7 @@ class YoloCnnDetector(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = YoloCnnDetector(
-        yolo_path="/ros2_ws/src/adore_cv/adore_cv/yolo_sign_obstacles.pt",
+        yolo_path="/ros2_ws/src/adore_cv/adore_cv/yolo_sign.pt",
         cnn_path="/ros2_ws/src/adore_cv/adore_cv/CNN_sign_obstacles.h5",
         cam_index=1
     )
