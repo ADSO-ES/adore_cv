@@ -54,7 +54,7 @@ class YoloCnnDetector(Node):
             self.get_logger().warn("Failed to grab frame")
             return
 
-        results = self.yolo_model(frame)
+        results = self.yolo_model(frame, conf=0.50)
         combined_results = []
 
         detection_array = Detection2DArray()
