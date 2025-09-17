@@ -69,19 +69,19 @@ class YoloCnnDetector(Node):
             class_id = int(box.cls[0])
             class_name = self.yolo_model.names[class_id]
 
-            crop = frame[y1:y2, x1:x2]
-            if crop.size == 0:
-                continue
+            #crop = frame[y1:y2, x1:x2]
+            #if crop.size == 0:
+            #    continue
 
             # CNN classification
-            resized = cv2.resize(crop, self.input_size)
-            input_tensor = np.expand_dims(resized, axis=0)
+            # resized = cv2.resize(crop, self.input_size)
+            # input_tensor = np.expand_dims(resized, axis=0)
 
-            cnn_pred = self.cnn_model.predict(input_tensor, verbose=0)[0]
-            cnn_class = int(np.argmax(cnn_pred))
-            cnn_conf = float(np.max(cnn_pred))
+            # cnn_pred = self.cnn_model.predict(input_tensor, verbose=0)[0]
+            # cnn_class = int(np.argmax(cnn_pred))
+            # cnn_conf = float(np.max(cnn_pred))
 
-            warning = int(class_id != cnn_class)
+            # warning = int(class_id != cnn_class)
 
             # Build Detection2D
             detection = Detection2D()
@@ -104,10 +104,10 @@ class YoloCnnDetector(Node):
 
             combined_results.append({
                 "yolo_class_name": class_name,
-                "yolo_conf": round(conf, 3),
-                "cnn_class": cnn_class,
-                "cnn_conf": round(cnn_conf, 3),
-                "warning": warning
+                "yolo_conf": round(conf, 3)
+                #"cnn_class": cnn_class,
+                #"cnn_conf": round(cnn_conf, 3)
+                #"warning": warning
             })
 
             # ==== Draw on frame ====
